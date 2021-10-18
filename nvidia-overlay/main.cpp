@@ -1,4 +1,7 @@
-//#define LOG_DEBUG_MESSAGES
+#ifdef _DEBUG
+#define LOG_DEBUG_MESSAGES
+#endif
+
 #include "scene.h"
 
 

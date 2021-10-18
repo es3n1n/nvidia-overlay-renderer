@@ -6,8 +6,6 @@ namespace renderer {
 		TRACE_FN;
 
 		L_ASSERT( internal::init( ), "failed to init internal render stuff" );
-		L_ASSERT( colors::init( ), "failed to init colors" );
-		L_ASSERT( fonts::init( ), "failed to init colors" );
 
 		return utils::e_status::status_ok;
 	}

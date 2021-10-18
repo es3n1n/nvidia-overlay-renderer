@@ -2,32 +2,19 @@
 
 namespace renderer {
 	namespace colors {
-		ID2D1SolidColorBrush* m_white_color = nullptr;
-		ID2D1SolidColorBrush* m_red_color = nullptr;
-		ID2D1SolidColorBrush* m_green_color = nullptr;
-		ID2D1SolidColorBrush* m_blue_color = nullptr;
-		ID2D1SolidColorBrush* m_black_color = nullptr;
-
-		utils::e_status init( ) {
-			TRACE_FN;
-
-			internal::m_render_target->CreateSolidColorBrush( D2D1::ColorF( D2D1::ColorF::White ), &m_white_color );
-			internal::m_render_target->CreateSolidColorBrush( D2D1::ColorF( D2D1::ColorF::Red ), &m_red_color );
-			internal::m_render_target->CreateSolidColorBrush( D2D1::ColorF( D2D1::ColorF::Green ), &m_green_color );
-			internal::m_render_target->CreateSolidColorBrush( D2D1::ColorF( D2D1::ColorF::Blue ), &m_blue_color );
-			internal::m_render_target->CreateSolidColorBrush( D2D1::ColorF( D2D1::ColorF::Black ), &m_black_color );
-
-			return utils::e_status::status_ok;
+		ID2D1SolidColorBrush* get( uint32_t col ) {
+			if ( _colors.find( col ) != _colors.end( ) )
+				return _colors.at( col );
+			_colors[ col ] = NULL;
+			internal::m_render_target->CreateSolidColorBrush( D2D1::ColorF( col ), &_colors.at( col ) );
+			return ::renderer::colors::get( col );
 		}
 
 		utils::e_status shutdown( ) {
 			TRACE_FN;
 
-			m_white_color->Release( );
-			m_red_color->Release( );
-			m_green_color->Release( );
-			m_blue_color->Release( );
-			m_black_color->Release( );
+			for ( auto&& p : _colors )
+				p.second->Release( );  // @note: es3n1n: why would i care, nullptr here is an unexpected behavior!
 
 			return utils::e_status::status_ok;
 		}

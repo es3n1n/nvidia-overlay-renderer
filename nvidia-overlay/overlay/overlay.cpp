@@ -2,12 +2,6 @@
 
 
 namespace overlay {
-	namespace vars {
-		HWND m_window_hwnd;
-		RECT m_window_rect;
-		D2D1_SIZE_U m_window_size;
-	}
-
 	utils::e_status init( ) {
 		TRACE_FN;
 
@@ -18,15 +12,34 @@ namespace overlay {
 			TRACE_FN;
 
 			// style
-			SetWindowLongW( vars::m_window_hwnd, -20, static_cast< LONG_PTR >( ( static_cast< int >( GetWindowLongW( vars::m_window_hwnd, -20 ) ) | 0x20 ) ) );
+			SetWindowLongW(
+				vars::m_window_hwnd,
+				-20,
+				static_cast< LONG_PTR >(
+					static_cast< int >( GetWindowLongW( vars::m_window_hwnd, -20 ) ) | 0x20
+				)
+			);
 
 			// transparency
 			MARGINS margin = { -1, -1, -1, -1 };
-			DwmExtendFrameIntoClientArea( vars::m_window_hwnd, &margin );
-			L_ASSERT( SetLayeredWindowAttributes( vars::m_window_hwnd, 0x000000, 0xFF, 0x02 ), "SetLayeredWindowAttributes() returned false" );
+			DwmExtendFrameIntoClientArea( 
+				vars::m_window_hwnd, 
+				&margin 
+			);
+			L_ASSERT( SetLayeredWindowAttributes( 
+				vars::m_window_hwnd, 
+				0x000000, 
+				0xFF, 
+				0x02 
+			), "SetLayeredWindowAttributes() returned false" );
 
 			// top most
-			L_ASSERT( SetWindowPos( vars::m_window_hwnd, HWND_TOPMOST, 0, 0, 0, 0, 0x0002 | 0x0001 ), "SetWindowPos() returned false" );
+			L_ASSERT( SetWindowPos( 
+				vars::m_window_hwnd, 
+				HWND_TOPMOST, 
+				0, 0, 0, 0, 
+				0x0002 | 0x0001 
+			), "SetWindowPos() returned false" );
 
 			return utils::e_status::status_ok;
 		};

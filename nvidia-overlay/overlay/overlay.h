@@ -8,9 +8,9 @@
 
 namespace overlay {
 	namespace vars {
-		extern HWND m_window_hwnd;
-		extern RECT m_window_rect;
-		extern D2D1_SIZE_U m_window_size;
+		inline HWND m_window_hwnd;
+		inline RECT m_window_rect;
+		inline D2D1_SIZE_U m_window_size;
 	}
 
 	utils::e_status init( );

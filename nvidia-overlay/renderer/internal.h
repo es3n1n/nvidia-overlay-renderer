@@ -14,9 +14,9 @@
 
 namespace renderer {
 	namespace internal {
-		extern ID2D1Factory* m_d2d;
-		extern ID2D1HwndRenderTarget* m_render_target;
-		extern IDWriteFactory* m_factory;
+		inline ID2D1Factory* m_d2d;
+		inline ID2D1HwndRenderTarget* m_render_target;
+		inline IDWriteFactory* m_factory;
 
 		utils::e_status init( );
 		utils::e_status shutdown( );
